@@ -1,15 +1,12 @@
-import cv2
 import numpy as np
+import cv2
 
-def apply_mask(edges):
-    mask = np.zeros_like(edges)
-    height, width = mask.shape
-    vertices = np.array([[(0,height), (width,height), (width/2,height*11/20)]],dtype=np.int32)
-    cv2.fillPoly(mask, vertices, 255)
-    important_edges = cv2.bitwise_and(mask,edges)
-    return important_edges
+def masking(img, vertices):
+    mask = np.zeros_like(img)
+    mask = cv2.fillPoly(mask, vertices, 255)
+    return mask
 
-def hough_lines(edges, img):
+def hough(img, edges):
     # first line
     lines = cv2.HoughLines(edges,1,np.pi/180,50)
     for rho,theta in lines[0]:
@@ -64,23 +61,18 @@ def hough_lines(edges, img):
         cv2.line(img,(common_x,common_y),(x2,y2),(0,0,255),2)
     return img
 
-def find_lanes(frames):
-    #################################################
-    # grey scale
-    img = cv2.cvtColor(frames, cv2.COLOR_BGR2GRAY)
-    ##################################################
-    # blur 
-    # img = cv2.blur(img,(5,5))
-    img = cv2.GaussianBlur(img,(7,7),0)
-    # img = cv2.medianBlur(img,5)
-    #img = cv2.bilateralFilter(img,9,75,75)
-    ###################################################
-    # edge detection
-    edges = cv2.Canny(img,100,200)
-    # masking unnecessary edges
-    edges = apply_mask(edges)
-    # Hough lines, getting lanes
-    final = hough_lines(edges, img)
-    ####
+def find_lanes(img):
+    
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    cv2.imshow('gray',gray)
+    gray = cv2.GaussianBlur(img,(5,5),0)
+    edges = cv2.Canny(gray,190,220)
+    cv2.imshow('edges',edges)
+    vertices = np.array([[ (0,img.shape[0]), (img.shape[1],img.shape[0]), (img.shape[1]/2,img.shape[0]/2)]],dtype=np.int32)
+    mask = masking(edges, vertices)
+    cv2.imshow('mask',mask)
+    masked_edges = cv2.bitwise_and(mask,edges)
+    cv2.imshow('masked',masked_edges)
+    img = hough(img, masked_edges)
+    return img
 
-    return final
