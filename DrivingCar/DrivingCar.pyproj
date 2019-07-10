@@ -4,13 +4,14 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>5e93362c-d417-4f83-9de5-a773bd6bedfa</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>DrivingCar.py</StartupFile>
+    <StartupFile>LinesDetecting\main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>DrivingCar</Name>
     <RootNamespace>DrivingCar</RootNamespace>
+    <InterpreterId>Global|ContinuumAnalytics|Anaconda36-64</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,6 +23,35 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DrivingCar.py" />
+    <Compile Include="LinesDetecting\Lane.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LinesDetecting\laneDetection.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LinesDetecting\main.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="LinesDetecting\" />
+    <Folder Include="LinesDetecting\data\" />
+    <Folder Include="LinesDetecting\data\test_images\" />
+    <Folder Include="LinesDetecting\data\test_videos\" />
+    <Folder Include="LinesDetecting\out\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LinesDetecting\data\test_images\solidWhiteCurve.jpg" />
+    <Content Include="LinesDetecting\data\test_images\solidWhiteRight.jpg" />
+    <Content Include="LinesDetecting\data\test_images\solidYellowCurve.jpg" />
+    <Content Include="LinesDetecting\data\test_images\solidYellowCurve2.jpg" />
+    <Content Include="LinesDetecting\data\test_images\solidYellowLeft.jpg" />
+    <Content Include="LinesDetecting\data\test_images\whiteCarLaneSwitch.jpg" />
+    <Content Include="LinesDetecting\data\test_videos\solidWhiteRight.mp4" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|ContinuumAnalytics|Anaconda36-64" />
+    <InterpreterReference Include="Global|PythonCore|3.7" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
