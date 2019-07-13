@@ -64,15 +64,15 @@ def hough(img, edges):
 def find_lanes(img):
     
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    cv2.imshow('gray',gray)
+    #cv2.imshow('gray',gray)
     gray = cv2.GaussianBlur(img,(5,5),0)
     edges = cv2.Canny(gray,190,220)
-    cv2.imshow('edges',edges)
+    #cv2.imshow('edges',edges)
     vertices = np.array([[ (0,img.shape[0]), (img.shape[1],img.shape[0]), (img.shape[1]/2,img.shape[0]/2)]],dtype=np.int32)
     mask = masking(edges, vertices)
-    cv2.imshow('mask',mask)
+    #cv2.imshow('mask',mask)
     masked_edges = cv2.bitwise_and(mask,edges)
-    cv2.imshow('masked',masked_edges)
+    #cv2.imshow('masked',masked_edges)
     img = hough(img, masked_edges)
     return img
 
