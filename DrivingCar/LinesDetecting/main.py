@@ -3,7 +3,7 @@ import cv2
 import os
 from os.path import join, basename
 from collections import deque
-from lane_detection import find_lanes
+from laneDetection import find_lanes
 
 
 if __name__ == '__main__':
@@ -11,14 +11,14 @@ if __name__ == '__main__':
     resize_h, resize_w = 540, 960
 
     # test on images
-    test_images_dir = join('1_lane_marking//data', 'test_images')
+    test_images_dir = join('data', 'test_images')
     test_images = [join(test_images_dir, name) for name in os.listdir(test_images_dir)]
 
     for test_img in test_images:
 
         print('Processing image: {}'.format(test_img))
 
-        out_path = join('1_lane_marking//out', 'images', basename(test_img))
+        out_path = join('out', 'images', basename(test_img))
         in_image = cv2.imread(test_img, cv2.IMREAD_COLOR)
         out_image = find_lanes(in_image)
         cv2.imwrite(out_path, out_image)
