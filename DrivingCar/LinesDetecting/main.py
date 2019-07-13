@@ -1,4 +1,3 @@
-import matplotlib as plt
 import cv2
 import os
 from os.path import join, basename
