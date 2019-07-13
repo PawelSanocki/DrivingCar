@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+import matplotlib as plt
 import cv2
 import os
 from os.path import join, basename
@@ -11,14 +11,14 @@ if __name__ == '__main__':
     resize_h, resize_w = 540, 960
 
     # test on images
-    test_images_dir = join('data', 'test_images')
+    test_images_dir = join('C:\\Users\\sanoc\\Documents\\repos\\SelfDriving\\DrivingCar\\DrivingCar\\LinesDetecting\\data', 'test_images')
     test_images = [join(test_images_dir, name) for name in os.listdir(test_images_dir)]
 
     for test_img in test_images:
 
         print('Processing image: {}'.format(test_img))
 
-        out_path = join('out', 'images', basename(test_img))
+        out_path = join('C:\\Users\\sanoc\\Documents\\repos\\SelfDriving\\DrivingCar\\DrivingCar\\LinesDetecting\\data\\out', 'images', basename(test_img))
         in_image = cv2.imread(test_img, cv2.IMREAD_COLOR)
         out_image = find_lanes(in_image)
         cv2.imwrite(out_path, out_image)
